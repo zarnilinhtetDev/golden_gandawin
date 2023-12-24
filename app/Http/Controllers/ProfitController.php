@@ -54,6 +54,6 @@ class ProfitController extends Controller
 
         ]);
 
-        return redirect()->back()->with('update', 'Profit updated successfully');
+        return redirect(url('profit'))->with('updatedata', 'Profit updated successfully');
     }
 }

@@ -70,12 +70,12 @@
                         <div class="container-fluid">
                             <div class="row mb-2">
                                 <div class="col-sm-6">
-                                    <h1>Profit</h1>
+                                    <h1>Company Expenses</h1>
                                 </div>
                                 <div class="col-sm-6">
                                     <ol class="breadcrumb float-sm-right">
                                         <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-                                        <li class="breadcrumb-item active"> Profit</li>
+                                        <li class="breadcrumb-item active"> Company Expenses</li>
                                     </ol>
                                 </div>
                             </div>
@@ -94,18 +94,7 @@
 
                         </div>
                     @endif
-                    @if (session('updatedata'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('updatedata') }}
 
-                        </div>
-                    @endif
-                    @if (session('delete_success'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ session('delete_success') }}
-
-                        </div>
-                    @endif
 
 
 
@@ -125,64 +114,45 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ url('/profit_register') }}" method="post">
+                                        <form action="{{ url('/company_expense_stores') }}" method="post">
                                             @csrf
                                             <div class="form-group">
                                                 <label for="date">Date <span class="text-danger">*</span></label>
                                                 <input type="date" class="form-control" id="date"
                                                     value="<?php echo date('Y-m-d'); ?>" aria-describedby="emailHelp"
-                                                    name="profit_date" required>
-                                                @error('profit_date')
+                                                    name="date">
+                                                @error('date')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group mt-3">
-                                                <label for="voucher_no">Customer Name<span
+                                                <label for="voucher_no">Description<span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="customer_name"
-                                                    aria-describedby="emailHelp" name="customer_name" required>
-                                                @error('customer_name')
+                                                <textarea name="description" id="" cols="30" rows="5" class="form-control"></textarea>
+                                                @error('description')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group mt-3">
-                                                <label for="amount">Voucher Number <span
+                                                <label for="amount">User Name <span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="voucher" name="voucher"
-                                                    required>
-                                                @error('voucher')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-
-                                            <div class="form-group mt-3">
-                                                <label for="amount">Voucher Date <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="date" class="form-control" id="voucher_date"
-                                                    name="voucher_date">
-                                                @error('voucher_date')
+                                                <input type="text" class="form-control" id="voucher"
+                                                    name="user_name">
+                                                @error('user_name')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
 
                                             <div class="form-group mt-3">
-                                                <label for="amount">ရောင်းစျေး <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="sale"
-                                                    name="sale">
+                                                <label for="amount">Amount <span class="text-danger">*</span></label>
+                                                <input type="number" class="form-control" id="voucher_date"
+                                                    name="amount">
+                                                @error('amount')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
-                                            <div class="form-group mt-3">
-                                                <label for="amount">ဝယ်စျေး <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="buy"
-                                                    name="buy">
-                                            </div>
-                                            <div class="form-group mt-3">
-                                                <label for="amount">Profit <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="profit"
-                                                    name="profit">
-                                            </div>
+
+
 
                                             <div class="modal-footer justify-content-between">
                                                 <button type="button" class="btn btn-default"
@@ -202,7 +172,7 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Profit Table</h3>
+                                <h3 class="card-title">Company Expense Table</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -211,13 +181,9 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Date</th>
-                                            <th>Customer Name</th>
-                                            <th>Voucher Number</th>
-                                            <th>Voucher Date</th>
-                                            <th>ရောင်းစျေး</th>
-                                            <th>ဝယ်စျေး </th>
-                                            <th>Profit </th>
-
+                                            <th>Description</th>
+                                            <th>User Name</th>
+                                            <th>Amount</th>
 
                                             <th>Action</th>
                                         </tr>
@@ -226,27 +192,24 @@
                                         @php
                                             $no = '1';
                                         @endphp
-                                        @foreach ($profits as $profit)
+                                        @foreach ($expenses as $expense)
                                             <tr>
                                                 <td>{{ $no }}</td>
-                                                <td>{{ $profit->profit_date }}</td>
-                                                <td>{{ $profit->customer_name }}</td>
-                                                <td>{{ $profit->voucher }}</td>
-                                                <td>{{ $profit->voucher_date }}</td>
-                                                <td>{{ $profit->sale }}</td>
-                                                <td>{{ $profit->buy }}</td>
-                                                <td>{{ $profit->profit }}</td>
+                                                <td>{{ $expense->date }}</td>
+                                                <td>{{ $expense->description }}</td>
+                                                <td>{{ $expense->user_name }}</td>
+                                                <td>{{ $expense->amount }}</td>
+
 
 
 
                                                 <td>
-                                                    <a href="{{ url('profit_update', $profit->id) }}"
-                                                        class="btn btn-success">
+                                                    <a href="" class="btn btn-success">
                                                         <i class="fa-solid fa-pen-to-square"></i>
 
                                                     </a>
-
-                                                    <a href="{{ url('profit_delete', $profit->id) }}"
+                                                    {{-- {{ url('profit_delete', $profit->id) }} --}}
+                                                    <a href="{{ url('expense_delete', $expense->id) }} "
                                                         class="btn btn-danger"
                                                         onclick="return confirm('Are you sure you want to delete this user ?')">
                                                         <i class="fa-solid fa-trash"></i></a>
@@ -293,28 +256,7 @@
 
 
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Selecting elements
-                var saleInput = document.getElementById('sale');
-                var buyInput = document.getElementById('buy');
-                var profitInput = document.getElementById('profit');
 
-                // Adding input event listeners
-                saleInput.addEventListener('input', calculateProfit);
-                buyInput.addEventListener('input', calculateProfit);
-
-                // Function to calculate profit
-                function calculateProfit() {
-                    var saleValue = parseFloat(saleInput.value) || 0;
-                    var buyValue = parseFloat(buyInput.value) || 0;
-                    var profit = saleValue - buyValue;
-
-                    // Updating the profit input value
-                    profitInput.value = profit.toFixed(2);
-                }
-            });
-        </script>
 
 
         @include('master.footer')

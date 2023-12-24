@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CompanyExpenseController;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PriceController;
@@ -61,7 +62,11 @@ Route::get('profit_delete/{id} ', [ProfitController::class, 'profit_delete']);
 Route::get('profit_update/{id} ', [ProfitController::class, 'profit_update']);
 Route::post('profit_edit/{id} ', [ProfitController::class, 'profit_edit']);
 
+//company_expense
+Route::get('company_expense', [CompanyExpenseController::class, 'company_expense']);
+Route::post('company_expense_stores', [CompanyExpenseController::class, 'company_expense_stores']);
 
+Route::get('expense_delete/{id}', [CompanyExpenseController::class, 'expense_delete']);
 
 
 

@@ -48,10 +48,10 @@
                     </div>
                 </section>
                 @if (session('update'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('update') }}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('update') }}
 
-                </div>
+                    </div>
                 @endif
                 <div class="card card-warning col-8 offset-2">
 
@@ -60,52 +60,64 @@
                     <div class="card-body">
                         <form action="{{ url('profit_edit', $show->id) }}" method="post">
                             @csrf
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="date">Date <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="date"
+                                        aria-describedby="emailHelp" name="profit_date" required
+                                        value="{{ $show->profit_date }}">
+                                    @error('profit_date')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class=" form-group  col-md-6">
+                                    <label for="voucher_no">
+                                        Customer Name<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="customer_name"
+                                        aria-describedby="emailHelp" name="customer_name" required
+                                        value="{{ $show->customer_name }}">
+                                    @error('customer_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="form-group ">
-                                <label for="date">Date <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="date" aria-describedby="emailHelp" name="profit_date" required value="{{ $show->profit_date }}">
-                                @error('profit_date')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class=" form-group mt-3">
-                                <label for="voucher_no">Customer Name<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="customer_name" aria-describedby="emailHelp" name="customer_name" required value="{{ $show->customer_name}}">
-                                @error('customer_name')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group mt-3">
                                 <label for="amount">Voucher Number <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="voucher" name="voucher" required value="{{ $show->voucher }}">
+                                <input type="text" class="form-control" id="voucher" name="voucher" required
+                                    value="{{ $show->voucher }}">
                                 @error('voucher')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group mt-3">
                                 <label for="amount">Voucher Date <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="voucher_date" name="voucher_date" value="{{ $show->voucher_date }}">
+                                <input type="date" class="form-control" id="voucher_date" name="voucher_date"
+                                    value="{{ $show->voucher_date }}">
                                 @error('voucher_date')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group mt-3">
                                 <label for="amount">ရောင်းစျေး <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="sale" name="sale" value="{{ $show->sale }}">
+                                <input type="text" class="form-control" id="sale" name="sale"
+                                    value="{{ $show->sale }}">
                             </div>
                             <div class="form-group mt-3">
                                 <label for="amount">ဝယ်စျေး <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="buy" name="buy" value="{{ $show->buy }}">
+                                <input type="text" class="form-control" id="buy" name="buy"
+                                    value="{{ $show->buy }}">
                             </div>
                             <div class="form-group mt-3">
                                 <label for="amount">Profit <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="profit" name="profit" value="{{ $show->profit }}">
+                                <input type="text" class="form-control" id="profit" name="profit"
+                                    value="{{ $show->profit }}">
                             </div>
 
                             <div class="modal-footer justify-content-between">
 
-                                <button type="submit" class="btn btn-primary">Register</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
 
                         </form>

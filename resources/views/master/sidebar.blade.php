@@ -26,14 +26,23 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ url('/company_expense') }}" class="nav-link">
+                        <i class="fa-solid fa-user-minus"></i>
+                        <p>
+                            Company Expenses
+                            {{-- <i class="right fas fa-angle-left"></i> --}}
+                        </p>
+                    </a>
+                </li>
                 @if (auth()->user()->is_admin)
-                <a class="nav-link" href="{{ url('/user') }}">
-                    <i class="fa-solid fa-user-plus"></i>
-                    <p class="">
-                        Users
-                    </p>
+                    <a class="nav-link" href="{{ url('/user') }}">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <p class="">
+                            Users
+                        </p>
 
-                </a>
+                    </a>
                 @endif
             </ul>
         </nav>
