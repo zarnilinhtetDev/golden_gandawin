@@ -95,7 +95,12 @@
                         </div>
                     @endif
 
+                    @if (session('update'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('update') }}
 
+                        </div>
+                    @endif
 
 
                     <section class="content-body">
@@ -204,7 +209,8 @@
 
 
                                                 <td>
-                                                    <a href="" class="btn btn-success">
+                                                    <a href="{{ url('company_expense_update', $expense->id) }}"
+                                                        class="btn btn-success">
                                                         <i class="fa-solid fa-pen-to-square"></i>
 
                                                     </a>

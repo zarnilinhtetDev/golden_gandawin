@@ -65,6 +65,8 @@ Route::post('profit_edit/{id} ', [ProfitController::class, 'profit_edit']);
 //company_expense
 Route::get('company_expense', [CompanyExpenseController::class, 'company_expense']);
 Route::post('company_expense_stores', [CompanyExpenseController::class, 'company_expense_stores']);
+Route::get('company_expense_update/{id}', [CompanyExpenseController::class, 'company_expense_update']);
+Route::post('company_expense_edit/{id}', [CompanyExpenseController::class, 'company_expense_edit']);
 
 Route::get('expense_delete/{id}', [CompanyExpenseController::class, 'expense_delete']);
 
@@ -73,3 +75,5 @@ Route::get('expense_delete/{id}', [CompanyExpenseController::class, 'expense_del
 
 // customer
 Route::get('customer', [CustomerController::class, 'customer']);
+
+Route::get('logout', [AuthController::class, 'logout']);

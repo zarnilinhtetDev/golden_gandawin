@@ -23,4 +23,20 @@ class CompanyExpenseController extends Controller
         $delete->delete();
         return redirect()->back()->with('error', 'Company Expense deleted Successfully');
     }
+    public function company_expense_update($id)
+    {
+        $show = CompanyExpense::find($id);
+        return view('blade.company_expense.company_expense_update', compact('show'));
+    }
+    public function company_expense_edit(Request $request, $id)
+    {
+        $show = CompanyExpense::find($id);
+        $show->date = $request->date;
+        $show->description = $request->description;
+        $show->user_name = $request->user_name;
+        $show->amount = $request->amount;
+
+        $show->update();
+        return redirect(url('company_expense'))->with('update', 'Company Expenses updated successfully');
+    }
 }
