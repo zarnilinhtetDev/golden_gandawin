@@ -35,6 +35,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ url('/product') }}" class="nav-link">
+                        <i class="fa-brands fa-product-hunt"></i>
+                        <p>Products
+                            {{-- <i class="right fas fa-angle-left"></i> --}}
+                        </p>
+                    </a>
+                </li>
                 @if (auth()->user()->is_admin)
                     <a class="nav-link" href="{{ url('/user') }}">
                         <i class="fa-solid fa-user-plus"></i>

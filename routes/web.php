@@ -12,7 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\ProfitController;
 use App\Http\Controllers\CustomerController;
-
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,3 +77,10 @@ Route::get('expense_delete/{id}', [CompanyExpenseController::class, 'expense_del
 Route::get('customer', [CustomerController::class, 'customer']);
 
 Route::get('logout', [AuthController::class, 'logout']);
+
+//Items
+Route::get('product', [ItemController::class, 'item']);
+Route::post('product_store', [ItemController::class, 'item_store']);
+Route::get('product_delete/{id}', [ItemController::class, 'product_delete']);
+Route::get('product_update/{id}', [ItemController::class, 'product_update']);
+Route::post('update/{id}', [ItemController::class, 'update_product']);
