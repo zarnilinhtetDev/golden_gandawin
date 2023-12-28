@@ -43,6 +43,15 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('/customer') }}" class="nav-link">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <p>Customer
+                            {{-- <i class="right fas fa-angle-left"></i> --}}
+                        </p>
+                    </a>
+                </li>
                 @if (auth()->user()->is_admin)
                     <a class="nav-link" href="{{ url('/user') }}">
                         <i class="fa-solid fa-user-plus"></i>

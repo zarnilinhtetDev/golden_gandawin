@@ -6,13 +6,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\CompanyExpenseController;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\ProfitController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\ItemController;
+use App\Http\Controllers\CompanyExpenseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,3 +85,13 @@ Route::post('product_store', [ItemController::class, 'item_store']);
 Route::get('product_delete/{id}', [ItemController::class, 'product_delete']);
 Route::get('product_update/{id}', [ItemController::class, 'product_update']);
 Route::post('update/{id}', [ItemController::class, 'update_product']);
+
+//Invoice
+Route::get('invoice/{id}', [InvoiceController::class, 'invoice']);
+
+//Customer
+Route::get('customer', [CustomerController::class, 'customer']);
+Route::post('customer_store', [CustomerController::class, 'customer_store']);
+Route::get('customer_delete/{id}', [CustomerController::class, 'customer_delete']);
+Route::get('customer_edit/{id}', [CustomerController::class, 'customer_edit']);
+Route::post('customer_update/{id}', [CustomerController::class, 'customer_update']);
