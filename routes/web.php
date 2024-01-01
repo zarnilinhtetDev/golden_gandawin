@@ -86,8 +86,7 @@ Route::get('product_delete/{id}', [ItemController::class, 'product_delete']);
 Route::get('product_update/{id}', [ItemController::class, 'product_update']);
 Route::post('update/{id}', [ItemController::class, 'update_product']);
 
-//Invoice
-Route::get('invoice/{id}', [InvoiceController::class, 'invoice']);
+
 
 //Customer
 Route::get('customer', [CustomerController::class, 'customer']);
@@ -95,3 +94,13 @@ Route::post('customer_store', [CustomerController::class, 'customer_store']);
 Route::get('customer_delete/{id}', [CustomerController::class, 'customer_delete']);
 Route::get('customer_edit/{id}', [CustomerController::class, 'customer_edit']);
 Route::post('customer_update/{id}', [CustomerController::class, 'customer_update']);
+
+//Invoice
+Route::get('invoice/{id}', [InvoiceController::class, 'invoice']);
+Route::post('/autocomplete-item-code', [InvoiceController::class, 'autocompleteItemCode'])->name('autocomplete.item-code');
+Route::post('/get-item-data', [InvoiceController::class, 'getItemData'])->name('get.item.data');
+Route::post('/autocomplete_price', [App\Http\Controllers\InvoiceController::class, 'autocomplete_price'])->name('autocomplete_price');
+Route::get('/customer_service_search', [App\Http\Controllers\InvoiceController::class, 'customer_service_search'])->name('customer_service_search');
+Route::post('/customer_service_search_fill', [App\Http\Controllers\InvoiceController::class, 'customer_service_search_fill'])->name('customer_service_search_fill');
+Route::get('/customer_service_details/{id}', [InvoiceController::class, 'details']);
+Route::post('/get-item-data', [InvoiceController::class, 'getItemData'])->name('get.item.data');

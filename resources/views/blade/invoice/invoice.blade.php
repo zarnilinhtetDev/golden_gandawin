@@ -100,18 +100,15 @@
                                     </div>
                                 </div>
 
-
-                                <div class="row mt-3" style="margin-top:1vh;">
+                                <div class="row" style="margin-top:1vh;">
                                     <h3> Information</h3>
                                     <table class="table" style="width:98.6%">
                                         <thead style="background-color:#FFF200;color:black;">
                                             <tr class="item_header bg-gradient-directional-blue white">
                                                 <th class="text-center">{{ trans('Customer Name') }}</th>
-                                                <th class="text-center">{{ trans(' Phone Number ') }}</th>
-                                                <th class="text-center">{{ trans('Address') }}</th>
-                                                {{-- <th class="text-center">{{ trans(' Brand') }}</th>
+                                                <th class="text-center">{{ trans('Address ') }}</th>
+                                                <th class="text-center">{{ trans('Phone Number') }}</th>
 
-                                                <th class="text-center">{{ trans('Serial Number') }}</th> --}}
 
 
                                             </tr>
@@ -119,16 +116,13 @@
                                         </thead>
                                         <tbody>
                                             <tr class="item_header bg-gradient-directional-blue white">
-                                                <td class="text-center"><input type='text' name='model'
-                                                        id="model"></td>
-                                                <td class="text-center"><input type='text' name='chassic'
-                                                        id="chassic"></td>
-                                                <td class="text-center"><input type='text' name='year'
-                                                        id="year"></td>
-                                                {{-- <td class="text-center"><input type='text' name='license'
-                                                        id="license"></td>
-                                                <td class="text-center"><input type='text' name='klo'
-                                                        id="kilo"></td> --}}
+                                                <td class="text-center"><input type='text' name='customer_name'
+                                                        id="model" class="form-control"></td>
+                                                <td class="text-center"><input type='text' name='address'
+                                                        class="form-control" id="chassic"></td>
+                                                <td class="text-center"><input type='text' name='phone'
+                                                        class="form-control" id="year"></td>
+
 
                                             </tr>
                                         </tbody>
@@ -137,32 +131,28 @@
 
 
                                 <div class="row " style="margin-top:1vh;">
-                                    <!-- <table class="table-responsive tfr my_stripe"> -->
+
                                     <table class="">
                                         <thead style="background-color:#FFF200;color:black;">
                                             <tr class="item_header bg-gradient-directional-blue white"
                                                 style="margin-bottom:10px;">
                                                 <th width="5%" class="text-center">{{ trans('No') }}</th>
-                                                <th width="18%" class="text-center">{{ trans('Description') }}
-                                                </th>
-
-                                                <th width="8%" class="text-center">{{ trans('Quantity') }}
+                                                <th width="25%" class="text-center">{{ trans('Description') }}
                                                 </th>
                                                 <th width="18%" class="text-center">
                                                     {{ trans('Remark') }}
                                                 </th>
+                                                <th width="8%" class="text-center">{{ trans('Quantity') }}
+                                                </th>
+
                                                 <th width="17%" class="text-center">{{ trans('Unit Price') }}
                                                 </th>
-                                                <th width="17%" class="text-center">{{ trans('FOC') }}
+                                                <th width="10%" class="text-center">{{ trans('Discount (%)') }}
                                                 </th>
-                                                <th width="17%" class="text-center">{{ trans('Discount(%)') }}
+                                                <th width="10%" class="text-center">{{ trans('Discount') }}
                                                 </th>
-                                                <th width="17%" class="text-center">{{ trans('Discount(Cash)') }}
+                                                <th width="14%" class="text-center">{{ trans('FOC') }}
                                                 </th>
-                                                {{-- <th width="10%" class="text-center">{{ trans('taxt (%)') }}
-                                                </th> --}}
-                                                {{-- <th width="14%" class="text-center">{{ trans('Discount') }}
-                                                  </th> --}}
                                                 <th width="21%" class="text-center">{{ trans('Amount') }}
                                                     ({{ config('currency.symbol') }})
                                                 </th>
@@ -188,13 +178,22 @@
                                                         name="product_qty[]" id="amount-0" autocomplete="off"
                                                         value="1"><input type="hidden" id="alert-0"
                                                         value="" name="alert[]"></td>
+
                                                 <td><input type="text" class="form-control req prc"
                                                         name="product_price[]" id="price-0" autocomplete="off">
                                                 </td>
                                                 <td><input type="text" class="form-control vat "
-                                                        name="product_tax[]" id="vat-0" autocomplete="off">
+                                                        name="discount_percent[]" id="vat-0" autocomplete="off">
                                                 </td>
-
+                                                <td><input type="text" class="form-control dis " name="discount[]"
+                                                        id="dis-0" autocomplete="off">
+                                                </td>
+                                                <td>
+                                                    <select name="foc" id="" class="form-control">
+                                                        <option value="">No</option>
+                                                        <option value="">Yes</option>
+                                                    </select>
+                                                </td>
                                                 <td style="text-align:center">
                                                     <span class='ttlText' id="foc-0"></span>
                                                     <span class="currenty">{{ config('currency.symbol') }}</span>
@@ -207,6 +206,8 @@
                                                 <input type="hidden" name="total_tax[]" id="taxa-0"
                                                     value="0">
                                                 <input type="hidden" name="total_discount[]" id="disca-0"
+                                                    value="0">
+                                                <input type="hidden" name="discount[]" id="dis-0"
                                                     value="0">
                                                 <input type="hidden" class="ttInput" name="product_subtotal[]"
                                                     id="total-0" value="0">
@@ -225,14 +226,7 @@
 
 
 
-                                            <!-- <tr>
-                                                <td colspan="6"><textarea id="dpid-0" class="form-control html_editor" name="product_description[]"
-                                                    placeholder="{{ trans('general.enter_description') }} (Optional)" autocomplete="off"></textarea><br></td>
-                                                <td colspan="2"><select class="form-control unit" data-uid="0" name="u_m[]"
-                                                                        style="display: none">
 
-                                                    </select></td>
-                                            </tr> -->
 
                                             <tr class="last-item-row sub_c">
                                                 <td></td>
@@ -253,12 +247,9 @@
 
 
 
-                                                    <!-- <label for="serial_mode" class="form-check-label"><input type="checkbox"
-                                                                                                            value="1"
-                                                                                                            class="form-check-inline"
-                                                                                                            name="serial_mode"
-                                                                                                            id="serial_mode">
-                                                        {{ trans('products.search_serial_only') }}</label></td> -->
+
+                                                    {{-- {{ trans('products.search_serial_only') }}</label> --}}
+                                                </td>
                                                 </td>
                                                 <td colspan="6"></td>
                                                 <br><br>
@@ -283,9 +274,7 @@
                                             </tr>
                                             <tr class="sub_c" style="display: table-row;">
                                                 <td colspan="2">
-                                                    <!-- {{ trans('general.payment_terms') }} <select name="term_id" class="selectpicker form-control">                                                       <option value="testa"> test</option>
 
-                                                        </select> -->
                                                 </td>
                                                 <td colspan="3" align="right"><strong>Subtotal
                                                     </strong>
@@ -297,12 +286,18 @@
                                                 </td>
                                             </tr>
                                             <tr class="sub_c" style="display: table-row;">
-                                                <td colspan="2">
-                                                    <!-- {{ trans('general.payment_terms') }} <select name="term_id" class="selectpicker form-control">                                                       <option value="testa"> test</option>
-
-                                                        </select> -->
+                                                <td colspan="2"></td>
+                                                <td colspan="3" align="right"><strong>Discount Cash</strong></td>
+                                                <td align="left" colspan="2">
+                                                    <input type="text" name="discount" class="form-control"
+                                                        id="discount" readonly="">
                                                 </td>
-                                                <td colspan="3" align="right"><strong>Commercial Tax
+                                            </tr>
+                                            <tr class="sub_c" style="display: table-row;">
+                                                <td colspan="2">
+
+                                                </td>
+                                                <td colspan="3" align="right"><strong>Discount (%)
                                                     </strong>
                                                 </td>
                                                 <td align="left" colspan="2"><input type="text"
@@ -328,9 +323,7 @@
                                             </tr>
                                             <tr class="sub_c" style="display: table-row;">
                                                 <td colspan="2">
-                                                    <!-- {{ trans('general.payment_terms') }} <select name="term_id" class="selectpicker form-control">                                                       <option value="testa"> test</option>
 
-                                                        </select> -->
                                                 </td>
                                                 <td colspan="3" align="right"><strong>Paid
                                                     </strong>
@@ -343,9 +336,7 @@
                                             </tr>
                                             <tr class="sub_c" style="display: table-row;">
                                                 <td colspan="2">
-                                                    <!-- {{ trans('general.payment_terms') }} <select name="term_id" class="selectpicker form-control">                                                       <option value="testa"> test</option>
 
-                                                        </select> -->
                                                 </td>
                                                 <td colspan="3" align="right"><strong>Balance
                                                     </strong>
@@ -381,6 +372,595 @@
         </div>
 
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#item-0').typeahead({
+                source: function(query, process) {
+                    return $.ajax({
+                        url: "{{ route('autocomplete.item-code') }}",
+                        method: 'POST',
+                        data: {
+                            query: query
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            process(data);
+                        }
+                    });
+                }
+            });
+
+        });
+    </script>
+    {{-- <script>
+        $(document).ready(function() {
+            let count = 0;
+
+            function initializeTypeahead(count) {
+                $('#productname-' + count).typeahead({
+                    source: function(query, process) {
+                        return $.ajax({
+                            url: "{{ route('autocomplete.item-code') }}",
+                            method: 'POST',
+                            data: {
+                                query: query
+                            },
+                            dataType: 'json',
+                            success: function(data) {
+                                process(data);
+                            }
+                        });
+                    }
+                });
+            }
+
+            function initializeTypeaheads() {
+                for (let i = 0; i <= count; i++) {
+                    initializeTypeahead(i);
+                }
+            }
+
+
+            function updateItemName(itemCode, row) {
+                let itemNameInput = row.find('.item-name');
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('get.item.data') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        item_code: itemCode
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        itemNameInput.val(data.item_name);
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+            }
+
+            $("#addproduct").click(function(e) {
+                e.preventDefault();
+                count++;
+
+                var newRow = '<tr>' +
+                    '<td class="text-center">' + (count + 1) + '</td>' +
+                    '<td><input type="text" class="form-control productname typeahead" name="item_code[]" id="productname-' +
+                    count + '" autocomplete="off"></td>' +
+                    '<td><input type="text" class="form-control productname item-name" name="item_name[]" id="itemname-' +
+                    count + '" autocomplete="off"></td>' +
+                    '<td><input type="text" class="form-control req amnt" name="product_qty[]" id="amount-' +
+                    count +
+                    '" autocomplete="off" value="1"><input type="hidden" id="alert-' + count +
+                    '" value="" name="alert[]"></td>' +
+                    '<td><input type="text" class="form-control req prc" name="product_price[]" id="price-' +
+                    count + '" autocomplete="off"></td>' +
+                    '<td><input type="text" class="form-control vat " name="discount_percent[]" id="vat-' +
+                    count + '" autocomplete="off"></td>' +
+                    '<td><input type="text" class="form-control vat " name="product_discount[]" id="vat-' +
+                    count + '" autocomplete="off"></td>' +
+                    '<td>' +
+                    '<select name="foc[]" class="form-control">' +
+                    '<option value="No">No</option>' +
+                    '<option value="Yes">Yes</option>' +
+                    '</select>' +
+                    '</td>' +
+                    '<td style="text-align:center">' +
+                    '<span class="currenty"></span>' +
+                    '<strong><span id="result-' + count + '">0</span></strong>' +
+                    '</td>' +
+                    '<td class="text-center"></td>' +
+                    '<input type="hidden" name="total_tax[]" id="taxa-' + count + '" value="0">' +
+                    '<input type="hidden" name="total_discount[]" id="disca-' + count + '" value="0">' +
+                    '<input type="hidden" class="ttInput" name="product_subtotal[]" id="total-' +
+                    count + '" value="0">' +
+                    '<input type="hidden" class="pdIn" name="product_id[]" id="pid-' + count +
+                    '" value="0">' +
+                    '<input type="hidden" attr-org="" name="unit[]" id="unit-' + count + '" value="">' +
+                    '<input type="hidden" name="unit_m[]" id="unit_m-' + count + '" value="1">' +
+                    '<input type="hidden" name="code[]" id="hsn-' + count + '" value="">' +
+                    '<input type="hidden" name="serial[]" id="serial-' + count + '" value="">' +
+                    '<td><button type="submit" class="btn btn-danger remove_item_btn">Remove</button></td>' +
+                    '</tr>';
+
+                $("#showitem").before(newRow);
+
+                initializeTypeahead(count);
+            });
+
+            $(document).on('click', '.remove_item_btn', function(e) {
+                e.preventDefault();
+                let row_item = $(this).parent().parent();
+                $(row_item).remove();
+                count--;
+                initializeTypeaheads();
+            });
+
+            $(document).on('change', '.productname', function() {
+                let itemCode = $(this).val();
+                let row = $(this).closest('tr');
+                updateItemName(itemCode, row);
+            });
+
+            // Initialize typeahead for the first row
+            initializeTypeahead(count);
+
+            $(document).on("click", '#getprice', function(e) {
+                e.preventDefault();
+                let total = 0;
+                for (let i = 0; i <= count; i++) {
+                    var qty = parseInt($('#amount-' + i).val());
+                    var item_name = $('#productname-' + i).val();
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('autocomplete_price') }}",
+                        async: false,
+                        data: {
+                            name: item_name
+                        },
+                        success: function(data2) {
+                            $("#price-" + i).val(data2);
+                            price = data2;
+                        }
+                    });
+                }
+            });
+
+            $(document).on("click", '#calculate', function(e) {
+                e.preventDefault();
+                let total = 0;
+                let totalTax = 0;
+                let totalDiscount = 0;
+
+                for (let i = 0; i < (count + 1); i++) {
+                    var qty = parseInt($('#amount-' + i).val());
+                    var item_name = $('#productname-' + i).val();
+                    var sel = $('#focsel-' + i).val();
+                    let price = parseFloat($('#price-' + i).val());
+                    let taxRate = parseFloat($('#vat-' + i).val());
+                    let discount = parseFloat($('#dis-' + i).val());
+
+                    if (!isNaN(taxRate) && taxRate >= 0) {
+                        let itemTax = (price * qty * taxRate) / 100;
+                        totalTax += itemTax;
+                    }
+
+
+
+                    if (isNaN(discount)) {
+                        discount = 0; // Set discount to 0 if it's NaN
+                    }
+
+
+
+                    totalDiscount += discount;
+
+                    $("#result-" + i).text(price * qty);
+
+                    if (sel >= 1) {
+                        $("#foc-" + i).text('FOC');
+                        price = 0;
+                    }
+
+                    if (sel < 1) {
+                        $("#foc-" + i).text(price * qty);
+                    }
+
+                    total += price * qty;
+                }
+
+                let total_subtotal = total - totalDiscount; // Subtract total discount from subtotal
+                let total_total = total_subtotal - totalTax;
+
+                $("#invoiceyoghtml").val(total); // Display subtotal
+                $("#commercial_text").val(totalTax);
+                $("#discount").val(totalDiscount);
+                $("#total").val(total_total); // Display total
+
+
+
+
+            });
+        });
+
+
+        function paidFunction() {
+            let paid = document.getElementById("paid").value;
+            let total_p = document.getElementById("total").value;
+            let balance = total_p - paid;
+            $("#balance").val(balance);
+        }
+    </script> --}}
+    <script>
+        $(document).ready(function() {
+            let count = 0;
+
+            function initializeTypeahead(count) {
+                $('#productname-' + count).typeahead({
+                    source: function(query, process) {
+                        return $.ajax({
+                            url: "{{ route('autocomplete.item-code') }}",
+                            method: 'POST',
+                            data: {
+                                query: query
+                            },
+                            dataType: 'json',
+                            success: function(data) {
+                                process(data);
+                            }
+                        });
+                    }
+                });
+            }
+
+            function initializeDiscountInput(count) {
+                $('#dis-' + count).on('input', function() {
+                    calculateTotal();
+                });
+            }
+
+            function initializeTypeaheads() {
+                for (let i = 0; i <= count; i++) {
+                    initializeTypeahead(i);
+                    initializeDiscountInput(i);
+                }
+            }
+
+            function updateItemName(itemCode, row) {
+                let itemNameInput = row.find('.item-name');
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('get.item.data') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        item_code: itemCode
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        itemNameInput.val(data.item_name);
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+            }
+
+            $("#addproduct").click(function(e) {
+                e.preventDefault();
+                count++;
+
+                var newRow = '<tr>' +
+                    '<td class="text-center">' + (count + 1) + '</td>' +
+                    '<td><input type="text" class="form-control productname typeahead" name="item_code[]" id="productname-' +
+                    count + '" autocomplete="off"></td>' +
+                    '<td><input type="text" class="form-control productname item-name" name="item_name[]" id="itemname-' +
+                    count + '" autocomplete="off"></td>' +
+                    '<td><input type="text" class="form-control req amnt" name="product_qty[]" id="amount-' +
+                    count +
+                    '" autocomplete="off" value="1"><input type="hidden" id="alert-' + count +
+                    '" value="" name="alert[]"></td>' +
+                    '<td><input type="text" class="form-control req prc" name="product_price[]" id="price-' +
+                    count + '" autocomplete="off"></td>' +
+                    '<td><input type="text" class="form-control vat " name="discount_percent[]" id="vat-' +
+                    count + '" autocomplete="off"></td>' +
+                    '<td><input type="text" class="form-control vat " name="product_discount[]" id="dis-' +
+                    count + '" autocomplete="off"></td>' +
+                    '<td>' +
+                    '<select name="foc[]" class="form-control">' +
+                    '<option value="No">No</option>' +
+                    '<option value="Yes">Yes</option>' +
+                    '</select>' +
+                    '</td>' +
+                    '<td style="text-align:center">' +
+                    '<span class="currenty"></span>' +
+                    '<strong><span id="result-' + count + '">0</span></strong>' +
+                    '</td>' +
+                    '<td class="text-center"></td>' +
+                    '<input type="hidden" name="total_tax[]" id="taxa-' + count + '" value="0">' +
+                    '<input type="hidden" name="total_discount[]" id="disca-' + count + '" value="0">' +
+                    '<input type="hidden" class="ttInput" name="product_subtotal[]" id="total-' +
+                    count + '" value="0">' +
+                    '<input type="hidden" class="pdIn" name="product_id[]" id="pid-' + count +
+                    '" value="0">' +
+                    '<input type="hidden" attr-org="" name="unit[]" id="unit-' + count + '" value="">' +
+                    '<input type="hidden" name="unit_m[]" id="unit_m-' + count + '" value="1">' +
+                    '<input type="hidden" name="code[]" id="hsn-' + count + '" value="">' +
+                    '<input type="hidden" name="serial[]" id="serial-' + count + '" value="">' +
+                    '<td><button type="submit" class="btn btn-danger remove_item_btn">Remove</button></td>' +
+                    '</tr>';
+
+                $("#showitem").before(newRow);
+
+                initializeTypeahead(count);
+                initializeDiscountInput(count);
+            });
+
+            $(document).on('click', '.remove_item_btn', function(e) {
+                e.preventDefault();
+                let row_item = $(this).parent().parent();
+                $(row_item).remove();
+                count--;
+                initializeTypeaheads();
+            });
+
+            $(document).on('change', '.productname', function() {
+                let itemCode = $(this).val();
+                let row = $(this).closest('tr');
+                updateItemName(itemCode, row);
+            });
+
+            // Initialize typeahead for the first row
+            initializeTypeahead(count);
+            initializeDiscountInput(count);
+
+            $(document).on("click", '#getprice', function(e) {
+                e.preventDefault();
+                let total = 0;
+                for (let i = 0; i <= count; i++) {
+                    var qty = parseInt($('#amount-' + i).val());
+                    var item_name = $('#productname-' + i).val();
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('autocomplete_price') }}",
+                        async: false,
+                        data: {
+                            name: item_name
+                        },
+                        success: function(data2) {
+                            $("#price-" + i).val(data2);
+                            price = data2;
+                        }
+                    });
+                }
+            });
+
+            $(document).on("click", '#calculate', function(e) {
+                e.preventDefault();
+                calculateTotal();
+            });
+
+            function calculateTotal() {
+                let total = 0;
+                let totalTax = 0;
+                let totalDiscount = 0;
+
+                for (let i = 0; i < (count + 1); i++) {
+                    var qty = parseInt($('#amount-' + i).val());
+                    var item_name = $('#productname-' + i).val();
+                    var sel = $('#focsel-' + i).val();
+                    let price = parseInt($('#price-' + i).val());
+                    let taxRate = parseFloat($('#vat-' + i).val());
+                    let discount = parseFloat($('#dis-' + i).val());
+
+                    if (!isNaN(taxRate) && taxRate >= 0) {
+                        let itemTax = (price * qty * taxRate) / 100;
+                        totalTax += itemTax;
+                    }
+
+                    if (isNaN(discount)) {
+                        discount = 0; // Set discount to 0 if it's NaN
+                    }
+
+                    totalDiscount += discount;
+
+                    $("#result-" + i).text(price * qty);
+
+                    if (sel >= 1) {
+                        $("#foc-" + i).text('FOC');
+                        price = 0;
+                    }
+
+                    if (sel < 1) {
+                        $("#foc-" + i).text(price * qty);
+                    }
+
+                    total += price * qty;
+                }
+
+                let total_subtotal = total - totalDiscount; // Subtract total discount from subtotal
+                let total_total = total_subtotal - totalTax;
+
+                $("#invoiceyoghtml").val(total);
+                $("#commercial_text").val(totalTax);
+                $("#discount").val(totalDiscount); // Display total discount
+                $("#total").val(total_total);
+            }
+        });
+
+        function paidFunction() {
+            let paid = document.getElementById("paid").value;
+            let total_p = document.getElementById("total").value;
+            let balance = total_p - paid;
+            $("#balance").val(balance);
+        }
+    </script>
+
+
+
+
+
+    <script>
+        $(document).on('click', '.remove_item_btn', function(e) {
+            e.preventDefault();
+            let row_item = $(this).parent().parent();
+            $(row_item).remove();
+            count--;
+        });
+
+
+
+        $(document).on("click", '#getprice', function(e) {
+            e.preventDefault();
+            let total = 0;
+            for (let i = 0; i < (count + 1); i++) {
+
+                var qty = parseInt($('#amount-' + i).val()); //get value from amount
+                var item_name = $('#productname-' + i).val(); //get value from amount
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('autocomplete_price') }}",
+                    async: false,
+                    data: {
+                        name: item_name
+                    },
+                    success: function(data2) {
+
+                        $("#price-" + i).val(data2);
+                        price = data2;
+
+                    }
+                });
+            }
+        });
+
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // $(document).on("click", '#calculate', function(e) {
+        //     e.preventDefault();
+        //     let total = 0;
+        //     for (let i = 0; i < (count + 1); i++) {
+        //         // if ($('#amount-' + i).is(":empty")) {
+        //         //     var price = 1;
+        //         // } else {
+        //         //     var price = parseInt($('#amount-' + i).val()); //get value from amount
+        //         // }
+
+        //         var qty = parseInt($('#amount-' + i).val()); //get value from amount
+        //         var item_name = $('#productname-' + i).val(); //get value from amount
+        //         var sel = $('#focsel-' + i).val(); //get value from amount
+
+
+
+        //         let price = parseInt($('#price-' + i).val()); //get vlaue from price
+
+        //         console.log("price" + price)
+        //         // console.log("price2"+Object.values(price2))
+        //         $("#result-" + i).text((price *
+        //             qty));
+
+        //         //  $("#price-"+ i).val(data['retail_sale']);
+        //         if (sel >= 1) {
+        //             $("#foc-" + i).text('FOC');
+        //             price = 0;
+        //             // total = 0; //total adding (amount*price)
+        //         }
+        //         if (sel < 1) {
+        //             $("#foc-" + i).text((price * qty));
+        //             //  total = total + (price * qty); //total adding (amount*price)
+        //         } /// set  (amount*price) to result subtotal for each product
+
+        //         total = total + (price * qty); //total adding (amount*price)
+
+        //     }
+        //     let taxt = total * 0.05;
+        //     taxt = Math.ceil(taxt);
+        //     let total_total = taxt + total;
+        //     $("#invoiceyoghtml").val(total); //set  (amount*price)  per invoice  subtotal
+        //     $("#commercial_text").val(taxt); //commercial taxt 5% of total (sub total)
+        //     $("#total").val(total_total); //super total
+
+        //     // alert("Text:sdfgsdf"+ qty + "count is ;" + count);
+
+        // });
+
+
+
+
+
+
+
+        function paidFunction() {
+
+            let paid = document.getElementById("paid").value;
+            let total_p = document.getElementById("total").value;
+            let balance = total_p - paid;
+            $("#balance").val(balance); //update balance
+        }
+    </script>
+
+
+
+
+
+    <script type="text/javascript">
+        var path = "{{ route('customer_service_search') }}";
+
+        $('#customer').typeahead({
+            source: function(query, process) {
+                return $.get(path, {
+                    query: query
+                }, function(data) {
+                    return process(data);
+                });
+            }
+        });
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(document).on('click', '#customer_search', function(e) {
+            e.preventDefault();
+            let serialNumber = $("#customer").val();
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('customer_service_search_fill') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    serial_number: serialNumber
+                },
+                success: function(data) {
+                    console.log(data);
+
+                    $("#model").val(data['customer'][
+                        'customer_name'
+                    ]);
+                    $("#chassic").val(data['product'][
+                        'product_name'
+                    ]);
+
+                    $("#year").val(data['product']['product_model']);
+                    $("#license").val(data['product']['product_brand']);
+                    $("#kilo").val(data['product']['serial_number']);
+
+
+                }
+            })
+        });
+    </script>
 
 
 
