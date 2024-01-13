@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\ProfitController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CompanyExpenseController;
 
@@ -96,7 +97,6 @@ Route::get('customer_edit/{id}', [CustomerController::class, 'customer_edit']);
 Route::post('customer_update/{id}', [CustomerController::class, 'customer_update']);
 
 //Invoice
-Route::get('invoice/{id}', [InvoiceController::class, 'invoice']);
 Route::post('/autocomplete-item-code', [InvoiceController::class, 'autocompleteItemCode'])->name('autocomplete.item-code');
 Route::post('/get-item-data', [InvoiceController::class, 'getItemData'])->name('get.item.data');
 Route::post('/autocomplete_price', [App\Http\Controllers\InvoiceController::class, 'autocomplete_price'])->name('autocomplete_price');
@@ -104,3 +104,16 @@ Route::get('/customer_service_search', [App\Http\Controllers\InvoiceController::
 Route::post('/customer_service_search_fill', [App\Http\Controllers\InvoiceController::class, 'customer_service_search_fill'])->name('customer_service_search_fill');
 Route::get('/customer_service_details/{id}', [InvoiceController::class, 'details']);
 Route::post('/get-item-data', [InvoiceController::class, 'getItemData'])->name('get.item.data');
+
+
+Route::get('invoice/{id}', [InvoiceController::class, 'invoice']);
+Route::post('/store_invoice/{id}', [InvoiceController::class, 'store_invoice']);
+Route::get('/invoiceManage', [InvoiceController::class, 'invoiceManage']);
+Route::get('/invoiceManage/{id}', [InvoiceController::class, 'invoiceDetail']);
+
+//Payment
+Route::get('/payment/{id}', [PaymentController::class, 'payment'])->name('payment.show');;
+Route::post('/payment_register', [PaymentController::class, 'payment_register']);
+Route::get('payment_delete/{id}', [PaymentController::class, 'payment_delete']);
+Route::get('payment_edit/{id}', [PaymentController::class, 'payment_edit']);
+Route::post('payment_update/{id}', [PaymentController::class, 'payment_update']);

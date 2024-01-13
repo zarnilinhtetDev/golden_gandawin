@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('Synthetic')->nullable();
-            $table->string('Litre')->nullable();
+            // $table->string('Litre')->nullable();
             $table->string('API')->nullable();
             $table->string('ACEA')->nullable();
             $table->string('SAE')->nullable();

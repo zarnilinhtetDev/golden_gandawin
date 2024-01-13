@@ -24,14 +24,15 @@
     }
 
     body {
-        background-image: url('{{ asset('image/bg.jpg') }}');
+        background-image: url('{{ asset('image/12554.jpg') }}');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
 
     .cardbody-color {
-        background-color: #ebf2fa;
+        background-color: #0C0C0C;
+
     }
 
     a {
@@ -42,26 +43,28 @@
 <body>
 
 
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-md-6 offset-md-3 ">
-                <h2 class="text-center text-dark mt-5">Login Form</h2>
+                {{-- <h2 class="text-center text-dark mt-5">Login Form</h2> --}}
 
-                <div class="card my-5 ">
+                <div class="card my-5 " style="border-color: black">
 
                     <form class="card-body cardbody-color p-lg-5 " method="POST" action="{{ route('admin. login') }}">
                         @csrf
+                        <div class="text-center ">
+                            <img src="{{ asset('logo.png') }}" alt="" width="200px">
+                        </div>
 
-
-                        <div class="mb-3">
+                        <div class="mb-3 mt-4">
                             <input type="email" class="form-control" id="Username" aria-describedby="emailHelp"
-                                placeholder="email" name="email" value="{{ old('email') }}">
+                                placeholder=" Email" name="email" value="{{ old('email') }}">
                             @error('email')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" id="password" placeholder="password"
+                            <input type="password" class="form-control" id="password" placeholder=" Password"
                                 name="password" value="{{ old('password') }}">
                             @error('password')
                                 <p class="text-danger">{{ $message }}</p>

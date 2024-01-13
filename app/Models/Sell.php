@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class Sell extends Model
 {
     use HasFactory;
-    protected $guarded = [''];
-    public function invoices()
-    {
-        return $this->hasMany(Invoice::class);
-    }
 }

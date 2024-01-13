@@ -52,6 +52,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ url('/invoiceManage') }}" class="nav-link">
+                        <i class="fa-regular fa-file-lines"></i>
+                        <p>Invoice Manage
+                            {{-- <i class="right fas fa-angle-left"></i> --}}
+                        </p>
+                    </a>
+                </li>
                 @if (auth()->user()->is_admin)
                     <a class="nav-link" href="{{ url('/user') }}">
                         <i class="fa-solid fa-user-plus"></i>

@@ -70,12 +70,12 @@
                         <div class="container-fluid">
                             <div class="row mb-2">
                                 <div class="col-sm-6">
-                                    <h1> Customers</h1>
+                                    <h1>Payment</h1>
                                 </div>
                                 <div class="col-sm-6">
                                     <ol class="breadcrumb float-sm-right">
                                         <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-                                        <li class="breadcrumb-item active"> Customer</li>
+                                        <li class="breadcrumb-item active"> Payment</li>
                                     </ol>
                                 </div>
                             </div>
@@ -94,13 +94,19 @@
 
                         </div>
                     @endif
-
                     @if (session('update'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ session('update') }}
 
                         </div>
                     @endif
+                    @if (session('delete_success'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('delete_success') }}
+
+                        </div>
+                    @endif
+
 
 
                     <section class="content-body">
@@ -108,66 +114,51 @@
                             style="background-color: #007BFF" data-toggle="modal" data-target="#modal-lg">
                             Register
                         </button>
+                        {{-- <div class="mt-3">
+                            <h4> Customer Name - {{ $data->customer_name }} </h4> <br>
+                            <h4>Total - {{ $data->total }}</h4>
+                        </div> --}}
 
                         <div class="modal fade" id="modal-lg">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Customer Registers</h4>
+                                        <h4 class="modal-title">Payment Registers</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ url('/customer_store') }}" method="post">
+                                        <form action="{{ url('/payment_register') }}" method="post">
                                             @csrf
-
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="voucher_no">Customer Name<span
-                                                            class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="customer_name"
-                                                        name="customer_name">
-                                                    @error('customer_name')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group  col-md-6">
-                                                    <label for="voucher_no">Phone Number<span
-                                                            class="text-danger">*</span></label>
-                                                    <input type="tel" class="form-control" id="customer_ph"
-                                                        name="customer_ph">
-                                                    @error('customer_ph')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
+                                            <input type="number" class="form-control" id="invoice_id"
+                                                style="display: none" aria-describedby="emailHelp" name="invoice_id"
+                                                required value="{{ $data->id }}">
+                                            <div class="form-group">
+                                                <label for="date">Date <span class="text-danger">*</span></label>
+                                                <input type="date" class="form-control" id="payment_date"
+                                                    value="<?php echo date('Y-m-d'); ?>" aria-describedby="emailHelp"
+                                                    name="payment_date" required>
+                                                @error('payment_date')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
-
-                                            <div class="">
-                                                <label for="voucher_no">Address<span
+                                            <div class="form-group mt-3">
+                                                <label for="payment_amount">Amount<span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="address"
-                                                    name="address">
-                                                @error('address')
+                                                <input type="number" class="form-control" id="payment_amount"
+                                                    aria-describedby="emailHelp" name="payment_amount" required>
+                                                @error('payment_amount')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
 
 
-
-                                            <div class="mt-3">
-                                                <label for="voucher_no">Remark<span class="text-danger">*</span></label>
-                                                <textarea id="" cols="20" rows="3" class="form-control" name="remark"></textarea>
-                                                @error('remark')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
                                             <div class="modal-footer justify-content-between">
                                                 <button type="button" class="btn btn-default"
                                                     data-dismiss="modal">Close</button>
                                                 <button type="submit" class="btn btn-primary">Register</button>
                                             </div>
-
 
                                         </form>
 
@@ -177,63 +168,70 @@
                                 <!-- /.modal-content -->
                             </div>
                             <!-- /.modal-dialog -->
-                        </div>
+                        </div> <br>
 
-                        <div class="card">
+                        <a href="" class="btn btn-success">Name - {{ $data->customer_name }}</a>
+                        <a href="" class="btn btn-warning">Total - {{ $data->super_total }}</a>
+
+                        <a href="" class="btn btn-danger">Paid - {{ $data->paid }}</a>
+                        <a href="" class="btn btn-info">Balance - {{ $data->balance }} </a>
+                        <div class="card mt-4">
                             <div class="card-header">
-                                <h3 class="card-title">Company Expense Table</h3>
+                                <h3 class="card-title">
+
+                                    Payment Tables
+                                </h3>
                             </div>
+
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="example1" class="table table-bordered table-striped text-center">
+
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Customer Name</th>
-                                            <th>Phone Number</th>
-                                            <th>Address</th>
-                                            <th>Remark</th>
-                                            <th>Invoice</th>
+                                            <th>Date</th>
+                                            <th>Amount</th>
+
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php
                                             $no = '1';
+                                            $totalAmount = 0;
                                         @endphp
-                                        @foreach ($customers as $customers)
+                                        @foreach ($payment as $payment)
                                             <tr>
                                                 <td>{{ $no }}</td>
-                                                <td>{{ $customers->customer_name }}</td>
-                                                <td>{{ $customers->customer_ph }}</td>
-                                                <td>{{ $customers->address }}</td>
-                                                <td>{{ $customers->remark }}</td>
-                                                <td>
-                                                    <a href="{{ url('invoice', $customers->id) }} "
-                                                        class="btn btn-info">
-                                                        Invoice </a>
-                                                    {{-- <a href=" {{ url('invoiceDetail', $customers->id) }}"
-                                                        class="btn btn-secondary">
-                                                        Manage</a> --}}
+                                                <td>{{ $payment->payment_date }}</td>
+                                                <td style="background-color: #bae262">{{ $payment->payment_amount }}
                                                 </td>
-
                                                 <td>
-                                                    <a href="{{ url('customer_edit', $customers->id) }}"
+                                                    <a href="{{ url('payment_edit', $payment->id) }}"
                                                         class="btn btn-success">
                                                         <i class="fa-solid fa-pen-to-square"></i>
+
                                                     </a>
-                                                    <a href="{{ url('customer_delete', $customers->id) }} "
+
+                                                    <a href="{{ url('payment_delete', $payment->id) }}"
                                                         class="btn btn-danger"
-                                                        onclick="return confirm('Are you sure you want to delete this product ?')">
+                                                        onclick="return confirm('Are you sure you want to delete this Payment ?')">
                                                         <i class="fa-solid fa-trash"></i></a>
+
 
                                                 </td>
 
                                             </tr>
                                             @php
                                                 $no++;
+                                                $totalAmount += $payment->payment_amount;
                                             @endphp
                                         @endforeach
+                                        <td colspan="2" class="text-right">Total</td>
+                                        <td style="background-color: #bae262">{{ $totalAmount }}</td>
+                                        <td></td>
+
                                     </tbody>
 
 
@@ -268,7 +266,28 @@
 
 
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Selecting elements
+                var saleInput = document.getElementById('sale');
+                var buyInput = document.getElementById('buy');
+                var profitInput = document.getElementById('profit');
 
+                // Adding input event listeners
+                saleInput.addEventListener('input', calculateProfit);
+                buyInput.addEventListener('input', calculateProfit);
+
+                // Function to calculate profit
+                function calculateProfit() {
+                    var saleValue = parseFloat(saleInput.value) || 0;
+                    var buyValue = parseFloat(buyInput.value) || 0;
+                    var profit = saleValue - buyValue;
+
+                    // Updating the profit input value
+                    profitInput.value = profit.toFixed(2);
+                }
+            });
+        </script>
 
 
         @include('master.footer')

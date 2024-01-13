@@ -13,15 +13,26 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_id');
-            $table->string('customer_name');
-            $table->string('customer_phone');
-            $table->string('customer_address');
-            $table->string('invoice_date');
-            $table->string('invoice_number');
+            $table->string('cst')->nullable();
+            $table->string('customer_id')->nullable();
 
+            $table->string('customer_name')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('invoice_number')->nullable();
+            $table->string('invoice_date')->nullable();
 
+            $table->string('payment_duedate')->nullable();
+            // $table->string('consignment')->nullable();
 
+            // test
+            $table->string('total')->nullable();
+            $table->string('discount_cash')->nullable();
+            $table->string('commercial_text')->nullable();
+            $table->string('super_total')->nullable();
+            $table->string('paid')->nullable();
+            $table->string('balance')->nullable();
+            $table->softDeletes();
 
 
             $table->timestamps();

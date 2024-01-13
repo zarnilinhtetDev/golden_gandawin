@@ -123,7 +123,7 @@
                                             @csrf
                                             <p>Description</p>
                                             <div class="row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-12">
                                                     <label for="voucher_no">Synthetic<span
                                                             class="text-danger">*</span></label>
                                                     <input type="text" class="form-control" id="Synthetic"
@@ -132,7 +132,7 @@
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
-                                                <div class="form-group  col-md-6">
+                                                {{-- <div class="form-group  col-md-6">
                                                     <label for="voucher_no">Litre<span
                                                             class="text-danger">*</span></label>
                                                     <input type="text" class="form-control" id="Litre"
@@ -140,7 +140,7 @@
                                                     @error('Litre')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <hr>
                                             <p class="mt-3">Product and Quality</p>
@@ -228,7 +228,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Synthetic</th>
-                                            <th>Litre</th>
+                                            {{-- <th>Litre</th> --}}
 
                                             <th>API/ILSAC</th>
                                             <th>ACEA</th>

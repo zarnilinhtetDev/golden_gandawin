@@ -13,7 +13,7 @@
 
 <body>
 
-    <div class="container">
+    <div class="container-fluid">
 
         <h1>
             Invoice
@@ -22,11 +22,14 @@
         <div class="row">
             {{-- @include('flash-message') --}}
             <div style="width:60%;float:left;">
-                <p><span style="font-weight:bolder">Royal Ayeyarwaddy Co.,Ltd.<br>
-                        No.7, 87th Street,<br>
-                        Mingalar Taung Nyunt T/S, Yangon, Myanmar<br>
-                        Phone: 01-8384850 , 8389366 , 8394494<br>
-                        Mobile: 09-7310 2727 , 44310 2727</span>
+                <p><span style="font-weight:bolder">Golden Gandawin Trading Group <br>
+                        Address: No.11 Yuzuna Road,<br>
+                        Mingalar Taung Nyunt Tsp,<br>
+                        Yangon<br>
+                        Tel: 09-740850095,09-254489768 <br>
+                        Website: www.hanarokmmyanmar.com
+
+                    </span>
                 </p>
             </div>
             <div
@@ -34,18 +37,18 @@
                                 margin-right:20px;
                                 width:150px;
                                 height:100px;">
-                <img src="{{ url('logo1.png') }}" alt="logo" style="width:150px;height:90px;">
+                <img src="{{ url('logo.png') }}" alt="logo" style="width:250px;height:150px;">
             </div>
         </div>
         <span style="font-weight:bolder;"> <u> servicera1@gmail.com</u></span>
 
-        <div class="content-wrapper" style="background-color:aqua">
+        <div class="content-wrapper mt-5" style="background-color:aqua">
             <div class="content-body">
                 <div class="card">
                     <div class="card-content">
 
                         <div class="card-body">
-                            <form method="post" id="data_form" action=" {{ URL('invoice') }}"
+                            <form method="post" id="data_form" action=" {{ URL('store_invoice', $customers->id) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row ">
@@ -59,6 +62,13 @@
                                                         class="form-control round"
                                                         placeholder="{{ trans('Invoice Number') }}">
                                                 </div>
+                                                <div class="col-sm-12 my-3">
+                                                    <label for="invocieno" class="caption"
+                                                        style="font-weight:bolder">{{ trans('Payment Due Date') }}</label>
+                                                    <input type="date" name="payment_duedate"
+                                                        class="form-control round">
+                                                </div>
+
                                                 <input type="hidden" name="manager_type"
                                                     value="{{ Auth::user()->type }}">
                                             </div>
@@ -73,6 +83,7 @@
                                                     <div class="input-group-addon">
                                                         <span class="icon-calendar4" aria-hidden="true"></span>
                                                     </div>
+
                                                     <input type="date" name="invoice_date"
                                                         class="form-control round required"
                                                         placeholder="{{ trans('invoicedate') }}"
@@ -90,12 +101,14 @@
                                                     <div class="input-group-addon">
                                                         <span class="icon-calendar4" aria-hidden="true"></span>
                                                     </div>
-                                                    <input type="text" name="invoicedate"
+                                                    <input type="text" name="customer_id"
                                                         class="form-control round required" placeholder=""
+                                                        style="display:none" value="{{ $customers->id }}"
                                                         data-toggle="datepicker" autocomplete="false">
 
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +116,7 @@
                                 <div class="row" style="margin-top:1vh;">
                                     <h3> Information</h3>
                                     <table class="table" style="width:98.6%">
-                                        <thead style="background-color:#FFF200;color:black;">
+                                        <thead style="background-color:#99CCCD;color:black;">
                                             <tr class="item_header bg-gradient-directional-blue white">
                                                 <th class="text-center">{{ trans('Customer Name') }}</th>
                                                 <th class="text-center">{{ trans('Address ') }}</th>
@@ -117,11 +130,14 @@
                                         <tbody>
                                             <tr class="item_header bg-gradient-directional-blue white">
                                                 <td class="text-center"><input type='text' name='customer_name'
-                                                        id="model" class="form-control"></td>
+                                                        value="{{ $customers->customer_name }}" id="model"
+                                                        class="form-control text-center"></td>
                                                 <td class="text-center"><input type='text' name='address'
-                                                        class="form-control" id="chassic"></td>
+                                                        value="{{ $customers->address }}"
+                                                        class="form-control text-center" id="chassic"></td>
                                                 <td class="text-center"><input type='text' name='phone'
-                                                        class="form-control" id="year"></td>
+                                                        value="{{ $customers->customer_ph }}"
+                                                        class="form-control text-center" id="year"></td>
 
 
                                             </tr>
@@ -133,25 +149,25 @@
                                 <div class="row " style="margin-top:1vh;">
 
                                     <table class="">
-                                        <thead style="background-color:#FFF200;color:black;">
+                                        <thead style="background-color:#99CCCD;color:black;">
                                             <tr class="item_header bg-gradient-directional-blue white"
                                                 style="margin-bottom:10px;">
                                                 <th width="5%" class="text-center">{{ trans('No') }}</th>
                                                 <th width="25%" class="text-center">{{ trans('Description') }}
                                                 </th>
-                                                <th width="18%" class="text-center">
+                                                <th width="15%" class="text-center">
                                                     {{ trans('Remark') }}
                                                 </th>
                                                 <th width="8%" class="text-center">{{ trans('Quantity') }}
                                                 </th>
 
-                                                <th width="17%" class="text-center">{{ trans('Unit Price') }}
+                                                <th width="10%" class="text-center">{{ trans('Unit Price') }}
                                                 </th>
                                                 <th width="10%" class="text-center">{{ trans('Discount (%)') }}
                                                 </th>
                                                 <th width="10%" class="text-center">{{ trans('Discount') }}
                                                 </th>
-                                                <th width="14%" class="text-center">{{ trans('FOC') }}
+                                                <th width="10%" class="text-center">{{ trans('FOC') }}
                                                 </th>
                                                 <th width="21%" class="text-center">{{ trans('Amount') }}
                                                     ({{ config('currency.symbol') }})
@@ -189,9 +205,9 @@
                                                         id="dis-0" autocomplete="off">
                                                 </td>
                                                 <td>
-                                                    <select name="foc" id="" class="form-control">
-                                                        <option value="">No</option>
-                                                        <option value="">Yes</option>
+                                                    <select name="foc[]" id="" class="form-control">
+                                                        <option value="No">No</option>
+                                                        <option value="Yes">Yes</option>
                                                     </select>
                                                 </td>
                                                 <td style="text-align:center">
@@ -237,13 +253,14 @@
                                                         <i class="fa fa-plus-square"></i> {{ trans('Add row') }}
                                                     </button>
 
-                                                    <button type="button" class="btn btn-success" id="calculate">
+                                                    <button type="button" class="btn btn-primary " id="calculate">
                                                         <i class="fa fa-plus-square"></i> Calculate
-                                                    </button>
-                                                    <a href="{{ URL('item') }}" target="_blank"> <button
+                                                    </button> <br>
+
+                                                    {{-- <a href="{{ URL('product') }}" target="_blank"> <button
                                                             type="button" class="btn btn-success">
-                                                            <i class="fa fa-plus-square"></i> Item Search
-                                                        </button></a>
+                                                            <i class="fa fa-plus-square"></i> Product
+                                                        </button></a> --}}
 
 
 
@@ -272,11 +289,28 @@
                                                     @endif
                                                 </td>
                                             </tr>
-                                            <tr class="sub_c" style="display: table-row;">
-                                                <td colspan="2">
+                                            {{-- <tr class="sub_c" style="display: table-row;">
+                                                <td colspan="3">
 
                                                 </td>
-                                                <td colspan="3" align="right"><strong>Subtotal
+                                                <td colspan="4" align="right"><strong>Consignment
+                                                    </strong> <br>
+                                                </td>
+                                                <td align="left" colspan="2">
+                                                    &nbsp; &nbsp;&nbsp; <input type="radio" id="creditRadio"
+                                                        name="paymentMethod" class="form-check-input" value="credit">
+                                                    <label for="creditRadio">Credit</label>
+                                                    &nbsp; &nbsp;&nbsp;
+                                                    <input type="radio" id="cashRadio" name="paymentMethod"
+                                                        class="form-check-input" value="cash">
+                                                    <label for="cashRadio">Cash</label>
+                                                </td> <br><br>
+                                            </tr> --}}
+                                            <tr class="sub_c" style="display: table-row;">
+                                                <td colspan="3">
+
+                                                </td>
+                                                <td colspan="4" align="right"><strong>Subtotal
                                                     </strong>
                                                 </td>
                                                 <td align="left" colspan="2"><input type="text"
@@ -286,18 +320,18 @@
                                                 </td>
                                             </tr>
                                             <tr class="sub_c" style="display: table-row;">
-                                                <td colspan="2"></td>
-                                                <td colspan="3" align="right"><strong>Discount Cash</strong></td>
+                                                <td colspan="3"></td>
+                                                <td colspan="4" align="right"><strong>Discount Cash</strong></td>
                                                 <td align="left" colspan="2">
-                                                    <input type="text" name="discount" class="form-control"
+                                                    <input type="text" name="discount_cash" class="form-control"
                                                         id="discount" readonly="">
                                                 </td>
                                             </tr>
                                             <tr class="sub_c" style="display: table-row;">
-                                                <td colspan="2">
+                                                <td colspan="3">
 
                                                 </td>
-                                                <td colspan="3" align="right"><strong>Discount (%)
+                                                <td colspan="4" align="right"><strong>Discount (%)
                                                     </strong>
                                                 </td>
                                                 <td align="left" colspan="2"><input type="text"
@@ -307,12 +341,12 @@
                                                 </td>
                                             </tr>
                                             <tr class="sub_c" style="display: table-row;">
-                                                <td colspan="2">
+                                                <td colspan="3">
                                                     <!-- {{ trans('general.payment_terms') }} <select name="term_id" class="selectpicker form-control">                                                       <option value="testa"> test</option>
 
                                                         </select> -->
                                                 </td>
-                                                <td colspan="3" align="right"><strong>{{ trans('Total') }}
+                                                <td colspan="4" align="right"><strong>{{ trans('Total') }}
                                                     </strong>
                                                 </td>
                                                 <td align="left" colspan="2"><input type="text"
@@ -322,10 +356,10 @@
                                                 </td>
                                             </tr>
                                             <tr class="sub_c" style="display: table-row;">
-                                                <td colspan="2">
+                                                <td colspan="3">
 
                                                 </td>
-                                                <td colspan="3" align="right"><strong>Paid
+                                                <td colspan="4" align="right"><strong>Paid
                                                     </strong>
                                                 </td>
                                                 <td align="left" colspan="2"><input type="text"
@@ -335,10 +369,10 @@
                                                 </td>
                                             </tr>
                                             <tr class="sub_c" style="display: table-row;">
-                                                <td colspan="2">
+                                                <td colspan="3">
 
                                                 </td>
-                                                <td colspan="3" align="right"><strong>Balance
+                                                <td colspan="4" align="right"><strong>Balance
                                                     </strong>
                                                 </td>
                                                 <td align="left" colspan="2"><input type="text"
@@ -392,207 +426,7 @@
 
         });
     </script>
-    {{-- <script>
-        $(document).ready(function() {
-            let count = 0;
 
-            function initializeTypeahead(count) {
-                $('#productname-' + count).typeahead({
-                    source: function(query, process) {
-                        return $.ajax({
-                            url: "{{ route('autocomplete.item-code') }}",
-                            method: 'POST',
-                            data: {
-                                query: query
-                            },
-                            dataType: 'json',
-                            success: function(data) {
-                                process(data);
-                            }
-                        });
-                    }
-                });
-            }
-
-            function initializeTypeaheads() {
-                for (let i = 0; i <= count; i++) {
-                    initializeTypeahead(i);
-                }
-            }
-
-
-            function updateItemName(itemCode, row) {
-                let itemNameInput = row.find('.item-name');
-
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('get.item.data') }}",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        item_code: itemCode
-                    },
-                    success: function(data) {
-                        console.log(data);
-                        itemNameInput.val(data.item_name);
-                    },
-                    error: function(error) {
-                        console.error(error);
-                    }
-                });
-            }
-
-            $("#addproduct").click(function(e) {
-                e.preventDefault();
-                count++;
-
-                var newRow = '<tr>' +
-                    '<td class="text-center">' + (count + 1) + '</td>' +
-                    '<td><input type="text" class="form-control productname typeahead" name="item_code[]" id="productname-' +
-                    count + '" autocomplete="off"></td>' +
-                    '<td><input type="text" class="form-control productname item-name" name="item_name[]" id="itemname-' +
-                    count + '" autocomplete="off"></td>' +
-                    '<td><input type="text" class="form-control req amnt" name="product_qty[]" id="amount-' +
-                    count +
-                    '" autocomplete="off" value="1"><input type="hidden" id="alert-' + count +
-                    '" value="" name="alert[]"></td>' +
-                    '<td><input type="text" class="form-control req prc" name="product_price[]" id="price-' +
-                    count + '" autocomplete="off"></td>' +
-                    '<td><input type="text" class="form-control vat " name="discount_percent[]" id="vat-' +
-                    count + '" autocomplete="off"></td>' +
-                    '<td><input type="text" class="form-control vat " name="product_discount[]" id="vat-' +
-                    count + '" autocomplete="off"></td>' +
-                    '<td>' +
-                    '<select name="foc[]" class="form-control">' +
-                    '<option value="No">No</option>' +
-                    '<option value="Yes">Yes</option>' +
-                    '</select>' +
-                    '</td>' +
-                    '<td style="text-align:center">' +
-                    '<span class="currenty"></span>' +
-                    '<strong><span id="result-' + count + '">0</span></strong>' +
-                    '</td>' +
-                    '<td class="text-center"></td>' +
-                    '<input type="hidden" name="total_tax[]" id="taxa-' + count + '" value="0">' +
-                    '<input type="hidden" name="total_discount[]" id="disca-' + count + '" value="0">' +
-                    '<input type="hidden" class="ttInput" name="product_subtotal[]" id="total-' +
-                    count + '" value="0">' +
-                    '<input type="hidden" class="pdIn" name="product_id[]" id="pid-' + count +
-                    '" value="0">' +
-                    '<input type="hidden" attr-org="" name="unit[]" id="unit-' + count + '" value="">' +
-                    '<input type="hidden" name="unit_m[]" id="unit_m-' + count + '" value="1">' +
-                    '<input type="hidden" name="code[]" id="hsn-' + count + '" value="">' +
-                    '<input type="hidden" name="serial[]" id="serial-' + count + '" value="">' +
-                    '<td><button type="submit" class="btn btn-danger remove_item_btn">Remove</button></td>' +
-                    '</tr>';
-
-                $("#showitem").before(newRow);
-
-                initializeTypeahead(count);
-            });
-
-            $(document).on('click', '.remove_item_btn', function(e) {
-                e.preventDefault();
-                let row_item = $(this).parent().parent();
-                $(row_item).remove();
-                count--;
-                initializeTypeaheads();
-            });
-
-            $(document).on('change', '.productname', function() {
-                let itemCode = $(this).val();
-                let row = $(this).closest('tr');
-                updateItemName(itemCode, row);
-            });
-
-            // Initialize typeahead for the first row
-            initializeTypeahead(count);
-
-            $(document).on("click", '#getprice', function(e) {
-                e.preventDefault();
-                let total = 0;
-                for (let i = 0; i <= count; i++) {
-                    var qty = parseInt($('#amount-' + i).val());
-                    var item_name = $('#productname-' + i).val();
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ route('autocomplete_price') }}",
-                        async: false,
-                        data: {
-                            name: item_name
-                        },
-                        success: function(data2) {
-                            $("#price-" + i).val(data2);
-                            price = data2;
-                        }
-                    });
-                }
-            });
-
-            $(document).on("click", '#calculate', function(e) {
-                e.preventDefault();
-                let total = 0;
-                let totalTax = 0;
-                let totalDiscount = 0;
-
-                for (let i = 0; i < (count + 1); i++) {
-                    var qty = parseInt($('#amount-' + i).val());
-                    var item_name = $('#productname-' + i).val();
-                    var sel = $('#focsel-' + i).val();
-                    let price = parseFloat($('#price-' + i).val());
-                    let taxRate = parseFloat($('#vat-' + i).val());
-                    let discount = parseFloat($('#dis-' + i).val());
-
-                    if (!isNaN(taxRate) && taxRate >= 0) {
-                        let itemTax = (price * qty * taxRate) / 100;
-                        totalTax += itemTax;
-                    }
-
-
-
-                    if (isNaN(discount)) {
-                        discount = 0; // Set discount to 0 if it's NaN
-                    }
-
-
-
-                    totalDiscount += discount;
-
-                    $("#result-" + i).text(price * qty);
-
-                    if (sel >= 1) {
-                        $("#foc-" + i).text('FOC');
-                        price = 0;
-                    }
-
-                    if (sel < 1) {
-                        $("#foc-" + i).text(price * qty);
-                    }
-
-                    total += price * qty;
-                }
-
-                let total_subtotal = total - totalDiscount; // Subtract total discount from subtotal
-                let total_total = total_subtotal - totalTax;
-
-                $("#invoiceyoghtml").val(total); // Display subtotal
-                $("#commercial_text").val(totalTax);
-                $("#discount").val(totalDiscount);
-                $("#total").val(total_total); // Display total
-
-
-
-
-            });
-        });
-
-
-        function paidFunction() {
-            let paid = document.getElementById("paid").value;
-            let total_p = document.getElementById("total").value;
-            let balance = total_p - paid;
-            $("#balance").val(balance);
-        }
-    </script> --}}
     <script>
         $(document).ready(function() {
             let count = 0;
@@ -666,7 +500,7 @@
                     count + '" autocomplete="off"></td>' +
                     '<td><input type="text" class="form-control vat " name="discount_percent[]" id="vat-' +
                     count + '" autocomplete="off"></td>' +
-                    '<td><input type="text" class="form-control vat " name="product_discount[]" id="dis-' +
+                    '<td><input type="text" class="form-control vat " name="discount[]" id="dis-' +
                     count + '" autocomplete="off"></td>' +
                     '<td>' +
                     '<select name="foc[]" class="form-control">' +

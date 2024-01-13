@@ -9,7 +9,7 @@ class CustomerController extends Controller
 {
     public function customer()
     {
-        $customers = Customer::all();
+        $customers = Customer::latest()->get();
         return view('blade.customer.customer', compact('customers'));
     }
     public function customer_store(Request $request, Customer $customers)
